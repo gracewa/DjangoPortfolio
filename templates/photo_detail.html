@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="font-family:calibri;
+	font-weight:bold;
+	letter-spacing:1px;
+	color:#1a1a1a;
+	font-size:50px;
+    margin-left:300px;">{{ photo.title }}</h1>
+<div class="row">
+    <div class="col-md-8">
+        <img src="{{photo.image.url}}" alt="" width="75%">
+    </div>
+    <div class="col-md-4">
+        <h5>Description:</h5>
+        <p>{{ photo.description }}</p>
+
+    </div>
+</div>
+{% endblock %}

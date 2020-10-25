@@ -1,0 +1,65 @@
+{%extends 'base.html'%}
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    {% if photos%}
+      <h2>Found {{ photos|length }} Photos from {{search_term}}</h2>
+    {% else %}
+      <h2> Found 0 photos for the search term {{search_term}}</h2>
+    {% endif %}
+
+  </div>
+
+  <div class="row">
+    {% for photo in photos %}
+    <div class="col-md-3 offset-md-1">
+        <div class="imageContainer">
+            <div class="card mb-2">
+
+                <img class="card-img-top" src="{{photo.image.url}}" class="img-responsive" alt="Image">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" id="card-title">{{ photo.title }}</h5>
+                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modal{{photo.title}}">View
+                    Details
+                </button>
+                <div class="modal fade" id="modal{{photo.title}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <!--Header-->
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">{{photo.title}}</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <!--Body-->
+                            <div class="modal-body" width="">
+
+                                <img src="{{photo.image.url}}" alt="" width="100%">
+                                <p>{{ photo.description }}</p>
+
+
+                            </div>
+                            <!--Footer-->
+                            <div class="modal-footer">
+                                <div class="res">
+                                <a href="/{{photo.pk}}/"
+                                   class="btn btn-outline-warning">
+                                    Copy Link
+                                </a>
+                                </div>
+                                <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
